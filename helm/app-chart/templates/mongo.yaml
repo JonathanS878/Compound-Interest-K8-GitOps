@@ -1,0 +1,70 @@
+# templates/statefulset.yaml
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo-deployment
+  labels:
+    app: {{ .Values.mongodb.labelapp }}
+spec:
+  serviceName: mongo
+  replicas: {{ .Values.mongodb.replicas }}
+  selector:
+    matchLabels:
+      app:  {{ .Values.mongodb.labelapp }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mongodb.labelapp }}
+    spec:
+      containers:
+      - name: mongodb
+        image: {{ .Values.mongodb.image }}
+        ports:
+        - containerPort: {{ .Values.mongodb.containerPort }}
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+           secretKeyRef:
+             name: {{ .Values.mongoSecret.name }}
+             key: mongo-user
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+           secretKeyRef:
+             name: {{ .Values.mongoSecret.name }}
+             key: mongo-password
+        volumeMounts:
+        - mountPath: /data/db
+          name: {{ .Values.mongodb.volumename }}
+      restartPolicy: Always
+      volumes:
+      - name: {{ .Values.mongodb.volumename }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.mongodb.volumename }}
+
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   labels:
+#     app: {{ .Values.mongodb.volumename }}
+#   name: {{ .Values.mongodb.volumename }}
+# spec:
+#   accessModes:
+#   - {{ .Values.mongodb.persistentVolumeClaim.accessModes }}
+#   resources:
+#     requests:
+#       storage: {{ .Values.mongodb.persistentVolumeClaim.storageSize }}
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: {{ .Values.mongodb.service.name }}
+# spec:
+#   selector:
+#     app: {{ .Values.mongodb.labelapp }}
+#   ports:
+#     - protocol: TCP
+#       port: {{ .Values.mongodb.service.port }}
+#       targetPort: {{ .Values.mongodb.service.port }}
