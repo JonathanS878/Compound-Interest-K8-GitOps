@@ -1,0 +1,39 @@
+name: Test K8 and Helm
+
+on:
+  push:
+    branches:
+      - feature
+
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: feature 
+    
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Start minikube
+      uses: medyagh/setup-minikube@master
+      
+    - name: View cluster
+      run: kubectl get pods -A        
+      
+    - name: Deploy minikube
+      run: |
+          helm install app helm/app-chart/
+      
+    - name: Wait for application to start
+      run: sleep 30   
+
+    - name: Test connectivity
+      run: ./helm/app-chart/test.sh
