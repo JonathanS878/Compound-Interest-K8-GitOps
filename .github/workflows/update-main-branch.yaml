@@ -1,4 +1,4 @@
-name: Merge Feature to main
+name: Merge Feature to master
 
 on:
   workflow_run:
@@ -13,10 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - name: Merge to main
+    - name: Merge to master
       uses: devmasx/merge-branch@master
       with:
         type: now
         from_branch: feature
-        target_branch: main
+        target_branch: master
         github_token: ${{ secrets.GIT_TOKEN }}
