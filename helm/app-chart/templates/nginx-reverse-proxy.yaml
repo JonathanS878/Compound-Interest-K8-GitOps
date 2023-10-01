@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: reverse-proxy-depl
-        image: binyamin22/nginx:v7
+        image: jonathans878/ci-nginx:first
         resources:
           limits:
             memory: "128Mi"

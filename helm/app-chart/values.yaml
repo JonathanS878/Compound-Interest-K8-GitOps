@@ -32,12 +32,12 @@ mongoExpress:
     nodePort: 30000
 
 compoundInterest:
-  image: binyamin22/c-i-app:v1
+  image: jonathans878/compound-interest:first
   labelapp: cp
   replicas: 1
   containerPort: 8000
   service:
-    name: cp-service
+    name: flask-app
     type: LoadBalancer
     port: 8000
     nodePort: 30100
