@@ -2,11 +2,11 @@
 
 This repository contains the GitOps configurations for the DevOps application, which is a part of a larger ecosystem composed of three repositories:
 
- **Application**: [Application Repo](https://github.com/BinyaminR/Application-compound-interest)
+ **Application**: [Application Repo](https://github.com/JonathanS878/Compound-Interest-Application)
 
- **GitOps** (Current repository): [GitOps Repo](https://github.com/BinyaminR/Gitops-compound-interest)
+ **GitOps** (Current repository): [GitOps Repo](https://github.com/JonathanS878/Compound-Interest-K8-GitOps)
  
- **Infrastructure**: [Infrastructure Repo](https://github.com/BinyaminR/Infrastructure-compound-interest)
+ **Infrastructure**: [Infrastructure Repo](https://github.com/JonathanS878/Compound-Interest-GCP-Infrastructure)
 
 ## Overview
 
