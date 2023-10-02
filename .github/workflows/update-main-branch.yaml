@@ -1,4 +1,4 @@
-name: Merge Feature to master
+name: Merge feature to master
 
 on:
   workflow_run:
