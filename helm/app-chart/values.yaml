@@ -32,7 +32,7 @@ mongoExpress:
     nodePort: 30000
 
 compoundInterest:
-  image: jonathans878/compound-interest:v1.0.3
+  image: jonathans878/compound-interest:v1.0.4
   labelapp: cp
   replicas: 1
   containerPort: 8000
